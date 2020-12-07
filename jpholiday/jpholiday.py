@@ -67,10 +67,10 @@ def holidays(start_date, end_date):
     指定された期間の祝日日、祝日名を返します。
     """
     warnings.warn("DeprecationWarning: Function 'jpholiday.holidays()' has moved to 'jpholiday.between()' in version '0.1.4' and will be removed in version '0.2'", UserWarning)
-    return between(start_date, end_date)
+    return between_w_name(start_date, end_date)
 
 
-def between(start_date, end_date):
+def between_w_name(start_date, end_date):
     """
     指定された期間の祝日日、祝日名を返します。
     """
@@ -82,4 +82,13 @@ def between(start_date, end_date):
 
         start_date = start_date + datetime.timedelta(days=1)
 
+    return output
+
+def between(start_date, end_date):
+    output = []
+    while start_date <= end_date:
+        if is_holiday(start_date):
+            output.append(start_date)
+        start_date = start_date + datetime.timedelta(days=1)
+    
     return output
